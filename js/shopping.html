@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+</head>
+<body>
+    Please select the item
+    <select name="" id="1" onclick="show(this.value)">
+        <option class="val" value="Apple">Apple</option>
+        <option class="val" value="Pineapple">Pineapple</option>
+        <option class="val" value="Orange">Orange</option>
+    </select>
+
+    <br><br>
+
+    Please select how many <label id="item"></label>s you want: 
+    <input type="text" id="quantity">
+    <br><br>
+    Please enter the tips: 
+    <input type="text" id="tips">
+    <br><br>
+    Home Delivery? 
+    <input type="radio" name="home" id="home_yes">Yes
+    <input type="radio" name="home" id="home_no">No
+    <br><br>
+    <button id="bill" onclick="bill()">Generate Bill</button>
+    <br><br>
+    Your bill is <label id="total">0.00</label> BDT
+
+    <script>
+
+        //  alert("Hello");
+
+        function clicked(){
+            document.getElementById("button_1").value = "Clicked";
+            document.getElementById("button_1").style.backgroundColor = "green";
+        }
+
+        function not_clicked(){
+            document.getElementById("button_1").value="Click Here";
+            document.getElementById("button_1").style.backgroundColor = "red";
+            document.getElementById("button_1").style.marginLeft = "0px";
+        }
+
+        function hover(){
+            document.getElementById("button_1").value = "Hovering Here";
+            document.getElementById("button_1").style.backgroundColor = "orange";
+            document.getElementById("button_1").style.marginLeft = "400px";
+        }
+
+        function hover_away(){
+            not_clicked();
+        }
+
+        function calculate(){
+            let celsius = Number(document.getElementById("input_1").value);
+            let fahrenheit = (celsius * 9/5) + 32;
+            document.getElementById("result").value = fahrenheit;
+        }
+
+        function sum(){
+            let num1 = Number(document.getElementById("sum_1").value);
+            let num2 = Number(document.getElementById("sum_2").value);
+
+            let res = num1 + num2;
+
+            document.getElementById("ans").innerHTML = res;
+        }
+
+        function calc(op){
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            let res = 0;
+
+            if(op=='+'){
+                res = num1 + num2;
+            }
+            else if(op=='-'){
+                res = num1 - num2;
+            }
+            else if(op=='*'){
+                res = num1 * num2;
+            }
+            else{
+                res = num1 / num2;
+            }
+
+            document.getElementById("answer").value = res;
+
+        }
+
+        function show(item){
+            document.getElementById("item").innerText = item;
+        }
+
+        function bill(){
+            let quantity = Number(document.getElementById("quantity").value);
+            let tips = Number(document.getElementById("tips").value);
+            let delivery = document.getElementById("home_yes").checked;
+            
+            let price_each = 12.5;
+            let price = 0;
+
+
+            if(quantity > 0 && quantity <= 10){
+                price = (quantity*price_each);
+                let discount = (price * 10) / 100;
+                price = price - discount;
+            }
+            else if(quantity > 10 && quantity <= 20){
+                price = (quantity*price_each);
+                let discount = (price * 15) / 100;
+                price = price - discount;
+            }
+            else{
+                price = (quantity*price_each);
+                let discount = (price * 20) / 100;
+                price = price - discount;
+            }
+            price = price + ((20 * price) / 100);
+        
+            if(delivery){
+                price = price + 50;
+            }
+            price = price + tips;
+            document.getElementById("total").innerText = price;
+        }
+
+    </script>
+
+</body>
+
+</html>
